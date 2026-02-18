@@ -1,0 +1,80 @@
+{
+  "app_name": "Architect Daily Idea Engine",
+  "created_at": "2026-02-18T11:17:23Z",
+  "agents": {
+    "research_agent": {
+      "agent_id": "69959f71a88c1b2285b16c77",
+      "name": "Use Case Research Agent",
+      "type": "sub_agent",
+      "provider": "perplexity",
+      "model": "sonar-pro",
+      "temperature": 0.3,
+      "top_p": 1,
+      "tools": [],
+      "parent_agent_id": "69959f9fa88c1b2285b16c7d"
+    },
+    "writer_agent": {
+      "agent_id": "69959f8d1055ffd099be8775",
+      "name": "Idea Writer Agent",
+      "type": "sub_agent",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5",
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "tools": [],
+      "parent_agent_id": "69959f9fa88c1b2285b16c7d"
+    },
+    "manager_agent": {
+      "agent_id": "69959f9fa88c1b2285b16c7d",
+      "name": "Idea Generation Coordinator",
+      "type": "manager",
+      "provider": "openai",
+      "model": "gpt-4.1",
+      "temperature": 0.3,
+      "top_p": 1,
+      "tools": [],
+      "managed_agents": ["69959f71a88c1b2285b16c77", "69959f8d1055ffd099be8775"]
+    },
+    "email_agent": {
+      "agent_id": "69959fbbe6a5282cfa0be109",
+      "name": "Email Campaign Agent",
+      "type": "independent",
+      "provider": "openai",
+      "model": "gpt-4.1",
+      "temperature": 0.2,
+      "top_p": 1,
+      "tools": ["GMAIL_SEND_EMAIL"]
+    }
+  },
+  "schedules": {
+    "daily_idea_generation": {
+      "schedule_id": "69959fc3399dfadeac379e2c",
+      "agent_id": "69959f9fa88c1b2285b16c7d",
+      "agent_name": "Idea Generation Coordinator",
+      "cron_expression": "0 8 * * *",
+      "timezone": "America/New_York",
+      "message": "Generate today's batch of daily AI agent ideas for the nurture email campaign. Cover trending use cases across productivity, business ops, content, research, communication, and automation categories.",
+      "is_active": true,
+      "max_retries": 2,
+      "retry_delay": 300
+    }
+  },
+  "agent_ids": [
+    "69959f71a88c1b2285b16c77",
+    "69959f8d1055ffd099be8775",
+    "69959f9fa88c1b2285b16c7d",
+    "69959fbbe6a5282cfa0be109"
+  ],
+  "schedule_ids": [
+    "69959fc3399dfadeac379e2c"
+  ],
+  "rag_ids": [],
+  "capabilities": {
+    "voice_config": null,
+    "image_output_config": null,
+    "file_output": false,
+    "has_scheduler": true,
+    "has_tools": true,
+    "tool_integrations": ["GMAIL_SEND_EMAIL"]
+  }
+}

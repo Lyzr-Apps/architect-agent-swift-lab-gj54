@@ -1,0 +1,87 @@
+{
+  "workflow": {
+    "nodes": [
+      {
+        "id": "input_node",
+        "type": "Input",
+        "label": "User Query",
+        "nodeCategory": "input"
+      },
+      {
+        "id": "manager_agent",
+        "type": "Agent",
+        "label": "Idea Generation Coordinator",
+        "nodeCategory": "agent",
+        "agent_id": "69959f9fa88c1b2285b16c7d",
+        "provider": "openai",
+        "model": "gpt-4.1",
+        "temperature": 0.3,
+        "top_p": 1,
+        "is_manager": true,
+        "managed_agents": ["69959f71a88c1b2285b16c77", "69959f8d1055ffd099be8775"]
+      },
+      {
+        "id": "research_agent",
+        "type": "Agent",
+        "label": "Use Case Research Agent",
+        "nodeCategory": "agent",
+        "agent_id": "69959f71a88c1b2285b16c77",
+        "provider": "perplexity",
+        "model": "sonar-pro",
+        "temperature": 0.3,
+        "top_p": 1,
+        "is_sub_agent": true,
+        "parent_agent": "69959f9fa88c1b2285b16c7d"
+      },
+      {
+        "id": "writer_agent",
+        "type": "Agent",
+        "label": "Idea Writer Agent",
+        "nodeCategory": "agent",
+        "agent_id": "69959f8d1055ffd099be8775",
+        "provider": "anthropic",
+        "model": "claude-sonnet-4-5",
+        "temperature": 0.7,
+        "top_p": 0.95,
+        "is_sub_agent": true,
+        "parent_agent": "69959f9fa88c1b2285b16c7d"
+      },
+      {
+        "id": "email_agent",
+        "type": "Agent",
+        "label": "Email Campaign Agent",
+        "nodeCategory": "agent",
+        "agent_id": "69959fbbe6a5282cfa0be109",
+        "provider": "openai",
+        "model": "gpt-4.1",
+        "temperature": 0.2,
+        "top_p": 1,
+        "tools": ["GMAIL_SEND_EMAIL"]
+      },
+      {
+        "id": "scheduler_node",
+        "type": "Scheduler",
+        "label": "Scheduled: Daily at 8:00 AM ET",
+        "nodeCategory": "agent",
+        "schedule_id": "69959fc3399dfadeac379e2c",
+        "cron_expression": "0 8 * * *",
+        "timezone": "America/New_York"
+      },
+      {
+        "id": "output_node",
+        "type": "Output",
+        "label": "Final Output",
+        "nodeCategory": "end"
+      }
+    ],
+    "edges": [
+      {"source": "input_node", "target": "manager_agent"},
+      {"source": "scheduler_node", "target": "manager_agent"},
+      {"source": "manager_agent", "target": "research_agent"},
+      {"source": "manager_agent", "target": "writer_agent"},
+      {"source": "manager_agent", "target": "email_agent"},
+      {"source": "manager_agent", "target": "output_node"},
+      {"source": "email_agent", "target": "output_node"}
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "agent_name": "Email Campaign Agent",
+  "agent_id": "69959fbbe6a5282cfa0be109",
+  "description": "Sends the approved daily ideas content via Gmail to the specified nurture campaign recipient list after the user reviews and approves.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "email_sent": "boolean",
+      "recipient_count": "number",
+      "subject_line": "string",
+      "delivery_status": "string",
+      "sent_at": "string"
+    }
+  },
+  "example_response": {
+    "result": {
+      "email_sent": false,
+      "recipient_count": 0,
+      "subject_line": "sample string",
+      "delivery_status": "sample string",
+      "sent_at": "sample string"
+    }
+  }
+}

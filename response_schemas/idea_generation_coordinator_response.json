@@ -1,0 +1,46 @@
+{
+  "agent_name": "Idea Generation Coordinator",
+  "agent_id": "69959f9fa88c1b2285b16c7d",
+  "description": "Coordinates the research and writing sub-agents to produce a complete set of daily Architect agent ideas with tools and time-savings data; aggregates final output for user review.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "ideas": [
+        {
+          "title": "string",
+          "prompt_suggestion": "string",
+          "tools": [
+            "string"
+          ],
+          "hours_saved_per_week": "number",
+          "category": "string",
+          "benefit_statement": "string"
+        }
+      ],
+      "campaign_subject_line": "string",
+      "generation_date": "string",
+      "total_ideas": "number"
+    }
+  },
+  "example_response": {
+    "result": {
+      "ideas": [
+        {
+          "title": "sample string",
+          "prompt_suggestion": "sample string",
+          "tools": [
+            "sample string"
+          ],
+          "hours_saved_per_week": 0,
+          "category": "sample string",
+          "benefit_statement": "sample string"
+        }
+      ],
+      "campaign_subject_line": "sample string",
+      "generation_date": "sample string",
+      "total_ideas": 0
+    }
+  }
+}
